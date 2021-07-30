@@ -32,6 +32,8 @@ export default class Chat extends React.Component {
                 
 			]
 		});
+
+        this.props.navigation.setOptions({title: this.props.route.params.name}); // Set title of screen to user's name
 	}
 
     onSend(messages = []) {
@@ -55,12 +57,8 @@ export default class Chat extends React.Component {
       }
 
     render() {
-        const {name, bgColor} = this.props.route.params;
-
-        this.props.navigation.setOptions({title: name}); // Set title of screen to user's name
-
         return (
-            <View style={[styles.mainContainer, {backgroundColor: bgColor}]}>
+            <View style={[styles.mainContainer, {backgroundColor: this.props.route.params.bgColor}]}>
                 <GiftedChat
                 style={{width: '80%'}}
                   messages={this.state.messages}

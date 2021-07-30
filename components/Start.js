@@ -184,10 +184,11 @@ const styles = StyleSheet.create({
         width: '88%'
     },
     userInputContainer: {
+        alignItems: 'center',
         backgroundColor: '#fff',
         height: '44%',
         justifyContent: 'space-evenly',
-        alignItems: 'center',
+        minHeight: 300,
         width: '88%'
     }
 });
