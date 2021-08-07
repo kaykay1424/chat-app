@@ -7,6 +7,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 /************* Components *********/
 import Chat from './components/Chat';
+import ChatRooms from './components/ChatRooms';
 import Start from './components/Start';
 
 const Stack = createStackNavigator();
@@ -14,9 +15,14 @@ const Stack = createStackNavigator();
 export default class App extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {text: ''};
+        this.state = {
+            activeStatus: '',
+            dbCollection: '',
+            inChatRoom: '',
+            text: ''
+        };
     }
-      
+          
     render() {
         return (
             <NavigationContainer>
@@ -24,12 +30,16 @@ export default class App extends React.Component {
                     initialRouteName="Start"
                 >
                     <Stack.Screen
-                    name="Start"
-                    component={Start}
+                        name="Start"
+                        component={Start}
                     />
                     <Stack.Screen
-                    name="Chat"
-                    component={Chat}
+                        name="Chat Rooms"
+                        component={ChatRooms}
+                    />
+                    <Stack.Screen
+                        name="Chat"
+                        component={Chat}    
                     />
                 </Stack.Navigator>
             </NavigationContainer>

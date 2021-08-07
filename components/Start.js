@@ -7,78 +7,120 @@ import {
     StyleSheet, 
     TouchableOpacity
 } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import PropTypes from 'prop-types';
+
 import Icon from '../assets/icon.svg';
 
 export default class Start extends React.Component {
     constructor(props) {
         super(props);
+        
         this.state = {
             bgColor: styles.bgColor1.backgroundColor,
             name: '',
-        }
+        };
     }
 
     render() {
-
-        // Create background color options
-        const backgroundColors = () => {
-            return [1, 2, 3, 4].map((element, i) => {
-                const bgColor = "bgColor" + element;
-
-                return (
-                    <View 
-                        key={i} 
-                        style={
-                            [
-                                styles[bgColor], 
-                                styles.bgColorContainer, 
-                                this.state.bgColor === styles[bgColor].backgroundColor ? styles.selectedBGColor : null
-                            ]
-                        }
-            
-                    >
-                        <TouchableOpacity style={[styles.bgColor, styles[bgColor]]} onPress={() => {this.setState({bgColor:styles[bgColor].backgroundColor})}}></TouchableOpacity>
-                    </View>
-                );
-            })
-        }
-      
         return (
             <View style={styles.mainContainer}>
-                <ImageBackground source={require('../assets/background-image.png')} resizeMode="cover" style={{width: '100%', height: '100%'}}>
+                <ImageBackground 
+                    source={require('../assets/background-image.png')} 
+                    resizeMode="cover" 
+                    style={{width: '100%', height: '100%'}}
+                >
                     <View style={styles.mainContainer}>
-                        <Text style={styles.pageTitle}>Chat App!</Text>    
+                        <Text style={styles.pageTitle}>Polychat</Text>    
                         <View style={styles.userInputContainer}>
                             <View style={styles.textInputContainer}>
                                 <Icon style={styles.icon} />
                                 <TextInput
                                     style={styles.textInput}
                                     placeholder="Your name"
-                                    onChangeText={(name) => this.setState({name})}
+                                    onChangeText={(name) => 
+                                        this.setState({name})}
                                     value={this.state.name} 
                                 />
                             </View>
                             <View style={styles.chooseColorsContainer}>
-                                <Text style={styles.chooseColorsText}>Choose your background color:</Text>
+                                <Text 
+                                    style={styles.chooseColorsText}
+                                >
+                                    Choose your background color:
+                                </Text>
                                 <View style={styles.bgColorsContainer}>
-                                    {backgroundColors()} 
+                                    {[1, 2, 3, 4].map((element, i) => {
+                                        const bgColor = 'bgColor' + element;
+
+                                        return (
+                                            <View 
+                                                key={i} 
+                                                style={
+                                                    [
+                                                        styles[bgColor], 
+                                                        styles
+                                                            .bgColorContainer, 
+                                                        this.state.bgColor === 
+                                                        styles[bgColor]
+                                                            .backgroundColor 
+                                                            ? styles
+                                                                .selectedBGColor 
+                                                            : null
+                                                    ]
+                                                }
+            
+                                            >
+                                                <TouchableOpacity 
+                                                    style={[styles.bgColor, 
+                                                        styles[bgColor]]} 
+                                                    onPress={() => 
+                                                    {this.setState(
+                                                        {bgColor:styles[bgColor]
+                                                            .backgroundColor});
+                                                    }}
+                                                ></TouchableOpacity>
+                                            </View>
+                                        );
+                                    })} 
                                 </View>
                             </View>
                             <View style={styles.buttonContainer}>
                                 <TouchableOpacity
                                     style={styles.button}
-                                    onPress={() => this.props.navigation.navigate('Chat', {name: this.state.name, bgColor: this.state.bgColor})}
+                                    onPress={() => 
+                                        this.props.navigation.navigate(
+                                            'Chat Rooms', 
+                                            {
+                                                name: this.state.name, 
+                                                bgColor: this.state.bgColor
+                                            })}
                                 >
-                                    <Text style={styles.buttonText}>Start chatting</Text>
+                                    <Text 
+                                        style={styles.buttonText}>
+                                            Choose Chat Room
+                                    </Text>
                                 </TouchableOpacity>
                             </View>
                         </View>
                     </View>
                 </ImageBackground>   
             </View>
-        )
+        );
     }
+
+    async componentDidMount() {
+        const localBgColor = await AsyncStorage.getItem('bgColor');
+        const localName = await AsyncStorage.getItem('name');
+
+        this.setState({
+            bgColor: localBgColor ? localBgColor: this.state.bgColor,
+            name: localName ? localName : this.state.localName
+        });
+    }
+
 }
+
 
 const styles = StyleSheet.create({
     bgColorContainer: { 
@@ -192,3 +234,9 @@ const styles = StyleSheet.create({
         width: '88%'
     }
 });
+
+Start.propTypes = {
+    navigation: PropTypes.shape({
+        navigate: PropTypes.func.isRequired
+    })
+};

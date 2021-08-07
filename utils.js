@@ -1,0 +1,55 @@
+export const languageProperties = {
+    chinese: {
+        color1: '#de280f',
+        color2: '#fede02',
+        currentUserText: '用户',
+        flag: require('./assets/chinese.png'),
+        leftBubbleBgColor: '#fede02',
+        leftBubbleColor: '#000',
+        rightBubbleBgColor: '#de280f',
+        rightBubbleColor: '#fff',
+        bannerGroupText: '欢迎',
+        bannerIndividualJoinText: '欢迎',
+        bannerIndividualExitText: '再见'
+    },
+    english: {
+        color1: '#12145b',
+        color2: '#fd0101',
+        currentUserText: 'Users',
+        flag: require('./assets/english.png'),
+        joinedChatText: 'has joined the chat',
+        leftBubbleColor: '#fff',
+        leftBubbleBgColor: '#12145b',
+        rightBubbleBgColor: '#fd0101',
+        rightBubbleColor: '#fff',
+        bannerGroupText: 'Welcome',
+        bannerIndividualJoinText: 'Welcome',
+        bannerIndividualExitText: 'Bye'
+    },
+    french: {
+        color1: '#032295',
+        color2: '#ed2938',
+        currentUserText: 'Utilisateurs',
+        flag: require('./assets/french.png'),
+        leftBubbleColor: '#000',
+        leftBubbleBgColor: '#ed2938',
+        rightBubbleBgColor: '#032295',
+        rightBubbleColor: '#fff',
+        bannerGroupText: 'Bienvenue',
+        bannerIndividualJoinText: 'Bienvenue',
+        bannerIndividualExitText: 'Adieu'
+    },
+    spanish: {
+        color1: '#c70b1f',
+        color2: '#fec404',
+        currentUserText: 'Usuarios',
+        flag: require('./assets/spanish.png'),
+        leftBubbleColor: '#000',
+        leftBubbleBgColor: '#fec404',
+        rightBubbleBgColor: '#c70b1f',
+        rightBubbleColor: '#fff',
+        bannerGroupText: 'Bienvenidos',
+        bannerIndividualJoinText: 'Bienvenido/a',
+        bannerIndividualExitText: 'Adiós'
+    },
+};
